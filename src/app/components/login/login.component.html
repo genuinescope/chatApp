@@ -1,0 +1,23 @@
+<div class="container">
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onFormSubmit(loginForm.value)">
+        <h2>Login</h2>
+        <mat-error><span *ngIf="!isValidUser">Invalid Login</span></mat-error>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <div class="button-row">
+            <!-- <button type="submit" [disabled]="!loginForm.valid" mat-fab color="primary"><mat-icon>login</mat-icon></button> -->
+            <button type="submit" mat-fab color="primary">login</button>
+            <button type="submit" mat-fab color="primary" (click)="goToRegister()">Click Here to Register</button>
+
+        </div>
+
+    </form>
+</div>

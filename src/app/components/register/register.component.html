@@ -1,0 +1,43 @@
+<div class="container">
+    <form class="example-form" [formGroup]="registerForm" (ngSubmit)="onFormSubmit(registerForm.value)">
+        <h2>Registration</h2>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input matInput formControlName="fullname">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Job Title</mat-label>
+            <select matNativeControl formControlName="jobtitle">
+                <option value="Cachier">Cachier</option>
+                <option value="Chef">Chef</option>
+                <option value="Supporter">Supporter</option>
+            </select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-error><span *ngIf="!validUsername">Username Already Exists</span></mat-error>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" (change)="onPasswordChange()">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Re-enter Password</mat-label>
+            <input type="password" matInput formControlName="confirmPassword" (change)="onPasswordChange()">
+            <mat-icon matSuffix>mode_edit</mat-icon>
+
+        </mat-form-field>
+        <mat-error><span *ngIf="!validPassword">Password Mismatch</span></mat-error>
+        <div class="button-row">
+            <!-- <button type="submit" [disabled]="!loginForm.valid" mat-fab color="primary"><mat-icon>login</mat-icon></button> -->
+            <button type="submit" mat-fab color="primary">Register</button>
+            <button type="submit" mat-fab color="primary" (click)="backToLogin()">Back to Login</button>
+        </div>
+
+    </form>
+</div>
