@@ -48,8 +48,6 @@ export class ChatRoomComponent implements OnInit {
     private temporaryStorageService: TemporaryStorageService
   ) {
     this.nickname = localStorage.getItem('nickname');
-    console.log(this.nickname);
-
   }
 
   async ngOnInit(): Promise<void> {
@@ -57,6 +55,7 @@ export class ChatRoomComponent implements OnInit {
       'message': [null, Validators.required]
     });
 
+    //if user is admin
     if (localStorage.getItem('isAdmin') == '1') {
       this.isAdmin = true;
     } else {
@@ -65,10 +64,12 @@ export class ChatRoomComponent implements OnInit {
     const userHeaders = from(this.chatService.getChatUsers()).subscribe(
       user => {
         let userData: any = Object.values(user);
+        //if user is admin then display first chat
         if (this.isAdmin) {
           this.loadChat(userData[0].uid);
          
         }
+        //if user is not admin ,load my chat history with admin
         if (!this.isAdmin) {
           this.loadChat(localStorage.getItem('uid'));
         }
@@ -78,6 +79,7 @@ export class ChatRoomComponent implements OnInit {
 
   }
 
+  //save chat
   onFormSubmit(form: any) {
     const chat = form;
     if (this.isAdmin) {
@@ -99,6 +101,7 @@ export class ChatRoomComponent implements OnInit {
     });
   }
 
+  //logout
   async exitChat() {
     console.log(this.selectedUser.uid);
     if (this.isAdmin) {
@@ -113,6 +116,7 @@ export class ChatRoomComponent implements OnInit {
 
   }
 
+  //load chat when admin shifting from one user to another.
   loadChat(uid: any) {
     this.chatForm.controls['message'].setValue('');
     let chatCache = this.temporaryStorageService.get(uid);
@@ -134,6 +138,7 @@ export class ChatRoomComponent implements OnInit {
 
   }
 
+  //save message cache when admin shifting from one user to another
   public saveToTemporaryStorage(): void {
     let chacheMessage = {
       key: this.selectedUser.uid,

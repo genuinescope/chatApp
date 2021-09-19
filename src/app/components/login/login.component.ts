@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.AuthServiceService.getAuthStatus()) {
-      // this.router.navigate(['/chatRoom']);
       this.router.navigate(['chatRoom']);
     }
     this.loginForm = this.formBuilder.group({
